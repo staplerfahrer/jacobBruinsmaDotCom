@@ -130,5 +130,24 @@
 			SSL/TLS provided by Let's Encrypt.<br>
 			This page loads in only one HTTP request.</p>
 	</div>
+	<script>
+		'use strict';
+		
+		var startTime = + new Date();
+		function statRequest() {
+			function secondsSince(startTime) {
+				return Math.round((new Date() - startTime) / 1000);
+			}
+			function statUrl(startTime) {
+				return 'stat.txt?t=' + secondsSince(startTime);
+			}
+			var req = new XMLHttpRequest();
+			if (!req) return false;
+			req.open('GET', statUrl(startTime));
+			req.send();
+		}
+
+		setInterval(statRequest, 1000);
+	</script>
 </body>
 </html>
